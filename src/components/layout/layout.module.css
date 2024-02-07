@@ -1,0 +1,17 @@
+.footer {
+  background-color: #f7f7f7;
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 8vh;
+  padding: 0 5rem;
+}
+
+.footerLogo {
+  font-size: 0.87rem;
+}
+
+.footerText {
+  font-size: 0.75rem;
+}
