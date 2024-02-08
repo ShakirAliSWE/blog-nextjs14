@@ -2,6 +2,10 @@ import React from "react";
 import { Box, Skeleton, Typography } from "@mui/material";
 import Image from "next/image";
 
+const renderHTML = (html) => {
+  return { __html: html };
+};
+
 export const BlogSingle = ({ blog }) => {
   return (
     <>
@@ -17,12 +21,13 @@ export const BlogSingle = ({ blog }) => {
           style={{ objectFit: "cover", width: "100%", borderRadius: 6 }}
         />
       </Box>
-      <Typography variant="h5" marginBottom={2}>
+      <Typography variant="h4" fontWeight={400} marginBottom={2}>
         {blog?.description}
       </Typography>
-      <Typography sx={{ justifyContent: "center" }} variant="subtitle1">
+      <div dangerouslySetInnerHTML={renderHTML(blog?.content_html)} />
+      {/* <Typography sx={{ justifyContent: "center" }} variant="subtitle1">
         {blog?.content_text}
-      </Typography>
+      </Typography> */}
     </>
   );
 };

@@ -1,55 +1,38 @@
 "use client";
-import { useState } from "react";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import Avatar from "@mui/material/Avatar";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { useContext } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Button, Box } from "@mui/material";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { UserContext } from "@/context/UserContext";
 
 const LayoutHeaderUser = () => {
-  const [anchorElUser, setAnchorElUser] = useState(null);
+  const router = useRouter();
+  const { setToken, authenticated, setAuthenticated } = useContext(UserContext);
 
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const logoutHandler = () => {
+    setToken(null);
+    setAuthenticated(false);
+    router.push("../login");
   };
 
   return (
-    <Box sx={{ flexGrow: 0 }}>
-      <Tooltip title="Open settings">
-        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Shakir Ali" src="https://api.slingacademy.com/public/sample-users/3.png" />
-        </IconButton>
-      </Tooltip>
-      <Menu
-        sx={{ mt: "45px" }}
-        id="menu-appbar"
-        anchorEl={anchorElUser}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        open={Boolean(anchorElUser)}
-        onClose={handleCloseUserMenu}
-      >
-        {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">{setting}</Typography>
-          </MenuItem>
-        ))}
-      </Menu>
+    <Box sx={{ flexGrow: 0, display: "flex" }}>
+      {authenticated ? (
+        <Button startIcon={<LogoutIcon />} sx={{ color: "inherit" }} onClick={logoutHandler}>
+          Logout
+        </Button>
+      ) : (
+        <Button
+          startIcon={<LoginIcon />}
+          sx={{ color: "inherit" }}
+          component={Link}
+          href={"/login"}
+        >
+          Login
+        </Button>
+      )}
     </Box>
   );
 };

@@ -1,5 +1,5 @@
 .footer {
-  background-color: #f7f7f7;
+  background-color: #f5f5f5;
   color: #000;
   display: flex;
   justify-content: space-between;
@@ -9,7 +9,7 @@
 }
 
 .footerLogo {
-  font-size: 0.87rem;
+  font-size: 1rem;
 }
 
 .footerText {

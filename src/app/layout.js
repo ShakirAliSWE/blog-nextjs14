@@ -1,9 +1,11 @@
-import "./globals.css";
+import { Suspense } from "react";
 import { Titillium_Web } from "next/font/google";
 import LayoutHeader from "@/components/layout/LayoutHeader";
 import LayoutFooter from "@/components/layout/LayoutFooter";
-import { Suspense } from "react";
 import LayoutLoading from "@/components/layout/LayoutLoading";
+import LayoutTheme from "@/components/layout/LayoutTheme";
+
+import "./globals.css";
 
 const TitilliumWeb = Titillium_Web({
   subsets: ["latin"],
@@ -18,13 +20,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <meta name="viewport" content="initial-scale=1, width=device-width" />
       <body className={TitilliumWeb.className}>
-        <div className="app-container">
-          <LayoutHeader />
-          <Suspense fallback={<LayoutLoading />}>{children}</Suspense>
-          <LayoutFooter />
-        </div>
+        <LayoutTheme>
+          <div className="app-container">
+            <LayoutHeader />
+            <Suspense fallback={<LayoutLoading />}>{children}</Suspense>
+            <LayoutFooter />
+          </div>
+        </LayoutTheme>
       </body>
     </html>
   );
