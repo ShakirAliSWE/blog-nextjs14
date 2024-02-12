@@ -24,7 +24,7 @@ export const postRequest = async (url, params, success = () => {}, error = () =>
     });
 };
 
-export const getRequest = async (url, params, success = () => {}, error = () => {}) => {
+export const getRequest = async (url, success = () => {}, error = () => {}) => {
   await axios
     .get(url)
     .then((res) => res.data)

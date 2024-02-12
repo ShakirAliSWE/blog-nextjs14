@@ -3,10 +3,11 @@ import { authCheckRequest } from "@/utils/server-request";
 import { createContext, useEffect, useState } from "react";
 
 export const UserContext = createContext();
+const LSToken = localStorage.getItem("_token");
 
 export default ({ children }) => {
   const [authenticated, setAuthenticated] = useState(false);
-  const [token, _setToken] = useState(localStorage.getItem("_token"));
+  const [token, _setToken] = useState(LSToken);
   const [loginUser, setLoginUser] = useState({});
 
   const setToken = (_token) => {
